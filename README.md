@@ -5,22 +5,24 @@ _________________
 Este repositório é parte do mini curso oferecido pelo [LIneA](https://www.linea.gov.br/)
 
 * [Desenvolvimento Colaborativo com Git e GitHub](#desenvolvimento-colaborativo-com-git-e-github)
-  + [Objetivo](#objetivo)
-  + [Pré requisitos](#pré-requisitos)
-  + [Sobre Versionamento](#sobre-versionamento)
-    - [Principais Vantagens](#principais-vantagens)
-    - [Sobre o Git](#sobre-o-git)
-    - [Sobre o GitHub](#sobre-o-github)
-    - [O que é um Repositório](#o-que-é-um-repositório)
-  + [Vamos a Prática](#vamos-a-prática)
-    - [Git Init](#git-init)
-    - [Git Status](#git-status)
-    - [Git Add](#git-add)
-    - [Git commit](#git-commit)
-    - [Git log](#git-log)
-    - [Git diff](#git-diff)
-    - [Git checkout](#git-checkout)
-  + [Material de Apoio](#material-de-apoio)
+* [Objetivo](#objetivo)
+* [Pré requisitos](#pré-requisitos)
+* [Sobre Versionamento](#sobre-versionamento)
+  + [Principais Vantagens](#principais-vantagens)
+  + [Sobre o Git](#sobre-o-git)
+  + [Sobre o GitHub](#sobre-o-github)
+  + [O que é um Repositório](#o-que-é-um-repositório)
+* [Vamos a Prática](#vamos-a-prática)
+  + [Git Init](#git-init)
+  + [Git Status](#git-status)
+  + [Git Add](#git-add)
+  + [Git commit](#git-commit)
+  + [Git log](#git-log)
+  + [Git diff](#git-diff)
+  + [Git checkout](#git-checkout)
+* [Material de Apoio](#material-de-apoio)
+
+https://ecotrust-canada.github.io/markdown-toc/
 
 ## Objetivo
 
@@ -212,9 +214,9 @@ Para mais informações do comando diff [Documentação](https://git-scm.com/doc
 
 ### Git checkout
 
-Alterne entre os branchs ou restaura os arquivos da árvore de trabalho, Atualiza os arquivos na árvore de trabalho para coincidir com a versão no índice ou na árvore informada.
+Alterna entre os branchs ou restaura os arquivos da árvore de trabalho, atualiza os arquivos na árvore de trabalho para coincidir com a versão no índice ou na árvore informada.
 
-Neste momento vamos ver só como restaurar um arquivo ao seu estado anterior no branch. O comando checkout vai ser bastante utilizado no seu dia a dia, então recomendo uma passada pela [Documentação](https://git-scm.com/docs/git-checkout/pt_BR)
+Primeiro vamos ver como restaurar um arquivo ao seu estado anterior no branch. O comando checkout vai ser bastante utilizado no seu dia a dia, então recomendo uma passada pela [Documentação](https://git-scm.com/docs/git-checkout/pt_BR)
 
 ```bash
 git checkout README.md
@@ -223,7 +225,7 @@ git checkout README.md
 ![git checkout](images/git_checkout_file.png)
 
 Repare que eu executei o checkout e em seguida fiz um status.
-A saída do Status me mostra que o arquivo README.md não tem nenhuma alteração, ele nem aparece mais na lista de modificados, está fora do staging e não será afetado pelo commit.
+A saída do Status me mostra que o arquivo README.md não tem nenhuma alteração, ele não aparece mais na lista de modificados, está fora do staging e não será afetado pelo commit.
 
 vamos fazer um commit destas mudanças
 
@@ -232,6 +234,99 @@ git commit -m "Foi adicionado um arquivo com varios comandos uteis do git."
 ```
 
 ![git commit 2](images/git_commit_2.png)
+
+Para exemplificar o uso do Checkout para mudar de branchs vamos remover o arquivo teste.txt do repositório, mas vamos fazer da seguinte forma.
+
+* Criar um novo branch que vai conter apenas essa mudança.
+* Remover o arquivo.
+* Fazer um commit neste branch
+* Fazer um Merge deste branch no branch master.
+
+### Git checkout para criar um novo branch
+
+Vamos criar um novo branch chamado remove_teste, para isso vamos usar o comando abaixo.
+
+```bash
+git checkout -b remove_teste
+```
+
+O parametro *-b* indica que estamos criando um novo branch *remove_teste* é o nome do branch. a partir de algora qualquer alteração que fizermos está acontecendo nesta ramificação do repositório e não afeta a branch master/main. podemos decidir se vamos querer essas modificações ou apenas abandonalas sem alterar o master.
+
+o resultado do comando é este:
+
+![git checkout b](images/git_checkout_b.png)
+
+Neste momento a situação do nosso repositório é esta:
+
+![git checkout b](images/git_branchs.png)
+
+Em azul seria nossa branch Master/Main e em roxo nosso novo branch remove_teste. isso significa que as branchs são idenpendentes.
+
+Agora que estamos em uma branch separada podemos fazer nossa alteração vamos remover o arquivo teste.txt com o comando:
+
+```bash
+rm teste.txt 
+```
+
+![removed file](images/removed_file.png)
+
+Após remover o arquivo, ao fazer um ` `  ` git status `  ` ` o git nos mostra que o arquivo foi removido. mas essa mudança ainda está no staged não foi commited ainda. vamos fazer git add e o commit.
+
+```bash
+git add teste.txt
+git commit -m "Foi removido o arquivo teste.txt"
+```
+
+Lembrando que este commit só existe neste branch. vamos checar usando o comando *git log* que lista os commits.
+
+```bash
+git log
+```
+
+![git log 1](images/git_log_1.png)
+
+Agora que fizemos nossa alteração no branch remove_teste, vamos voltar ao branch Master/Main. para isso vamos usar o comando chekout. 
+
+```bash
+git checkout main
+```
+
+Agora para ilustar que as modificações não existem no branch main, vamos executar o *git log*.
+
+![git log 2](images/git_log_2.png)
+
+Repare que no branch Main não tem o commit que removeu o arquivo.
+Isso por que as alterações feitas em um branch só são acessiveis em outro branch quando é feito um Merge. é o que vamos fazer agora 
+
+### Git Merge
+
+Mesclagem é o jeito do Git de unificar um histórico bifurcado. O comando git merge permite que você pegue as linhas de desenvolvimento independentes criadas pelo git branch e as integre em uma ramificação única. Este comando tem muitas opções vale uma passada na [Documentação](https://git-scm.com/docs/git-merge) e também neste [Tutórial](https://git-scm.com/book/pt-br/v2/Branches-no-Git-O-b%C3%A1sico-de-Ramifica%C3%A7%C3%A3o-Branch-e-Mesclagem-Merge).
+
+Agora vamos unificar as mudanças feitas no branch remove_teste com o branch Main. Primeiro passo é garantir que estamos no branch que vai receber as modificações, isso é feito com o *checkout*. 
+
+Estando no branch Main, vamos executar o comando merge que recebe como parametro o nome do branch com as modificações, o comando fica assim:
+
+```bash
+git merge remove_teste
+```
+
+![git merge](images/git_merge.png)
+
+Agora se executarmos o *git log* vamos ver que o branch Main agora possui o commit relacionado a remoção do arquivo teste.
+
+![git log 3](images/git_log_3.png)
+
+O que aconteceu com nosso repósitorio está representado nesta imagem.
+
+![branch merge](images/branch_merge.png)
+
+Tinhamos um ramo Master/Main, fizemos uma ramificação que é uma feature ou no nosso caso a remoção de um arquivo e depois aplicamos essa mudança na branch Main, repare que durante o desenvolvimento do branch remove_teste o branch Main continuou inalterado e é esse aspecto que garante a estabilidade.
+
+Com esse conjunto de comandos e procedimentos encerramos o ciclo de manipulação de um repositório, basicamente isso é tudo que precisamos para se trabalhar em um projeto versionado com git.
+
+Mas até agora tudo que fizemos está local na nossa maquina, vamos agora enviar esse repositório para um servidor remoto de git no caso o GitHub.
+
+## GitHub
 
 ## Material de Apoio
 
