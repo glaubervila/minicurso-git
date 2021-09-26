@@ -128,7 +128,7 @@ Antes de adicionarmos este arquivo vamos entender quais estados um arquivo pode 
 
 ### Git Add
 
-Este comando server para “adicionar conteúdo” (propor uma mudança qualquer, seja ela alterar, adicionar ou remover um conteúdo) de um arquivo local ao staging area, que terá a mudança confirmada, posteriormente, com o comando git commit, e finalmente enviada ao repositório remoto pelo git push.
+Este comando serve para “adicionar conteúdo” (propor uma mudança qualquer, seja ela alterar, adicionar ou remover um conteúdo) de um arquivo local ao staging area, que terá a mudança confirmada, posteriormente, com o comando git commit, e finalmente enviada ao repositório remoto pelo git push.
 
 Vamos adicionar nosso arquivo README.md com o seguinte comando:
 
@@ -327,6 +327,44 @@ Com esse conjunto de comandos e procedimentos encerramos o ciclo de manipulaçã
 Mas até agora tudo que fizemos está local na nossa maquina, vamos agora enviar esse repositório para um servidor remoto de git no caso o GitHub.
 
 ## GitHub
+
+Primeiro passo é acessar o github com seu usuario e senha, e depois clicar em New, precisamos criar um repositório no servidor do GitHub, durante a criação podemos escolher se o repositório já existe ou se estamos criando um novo.
+
+![github new](images/github_new.png)
+
+Após clicar em New temos essa tela:
+
+![github new 1](images/github_new_repo.png)
+
+Aqui vamos escolher o nome do nosso repositório, se ele é publico ou privado. e se o repositório vai ser iniciado pelo github ou não, no nosso vamos importar o nosso repositório, basta deixar os campos *Add a README file*, *Add .gitignore* e *Choose a license* vazios. e clicar em *Create a Repository*. pronto nosso repositório remoto está criado, e o github vai apresentar uma tela com sugestões de como configurar o repositório remoto no seu repo local.
+
+![github new 1](images/github_new_repo_2.png)
+
+Depois de criar o repositório o github vai sugerir algumas formas de iniciar o seu repositório, como nos já temos um repositório criado vamos usar a opção *Push an existing repository*.
+
+```bash
+git remote add origin https://github.com/glaubervila/exemplo_curso_git.git
+git branch -M main
+git push -u origin main
+```
+
+O primeiro comando é o remote add esse comando vai adicionar um origin remota ao repositório, nada mais é que o endereço deste repositório no servidor de git. Essa agora passa ser a origem deste repositório.
+
+O comando branch -M main é para renomear seu branch master caso não tenha feito ainda.
+
+O comando Push serve para enviar as mudanças locais para o servidor remoto.
+
+![git add remote](images/git_add_remote.png)
+
+Pronto agora nosso repositório local, tem uma copia hospedada no servidor remoto do github, podendo ser acessivel por qualquer pessoa e a partir de qualquer maquina.
+
+Vamos acessar a página do nosso repositório no github, para ver como ficou. o caminho é mesmo endereço da origem sem *.git* do final: *<https://github.com/glaubervila/exemplo_curso_git>*
+
+![github repo home](images/github_home_repo.png)
+
+Explicando um pouco a página do repositório, temos no titulo o nome do repositório e se é publico ou privado. A aba Code mostra qual branch estamos vendo, quantos branchs existem no servidor, abaixo temos os arquivos e pastas do projeto e caso seu projeto tenha um arquivo README.md ele será exibido na página principal do projeto.
+
+É recomendado sempre ter este arquivo, é um arquivo texto escrito com a liguagem Markdown. O github fornece um editor de Markdown que ajuda quem não tem experiencia com esse tipo de marcação. No Readme é interessante ter uma explicação sobre o projeto, para que ele serve, exemplos de como instalar e utilizar.
 
 ## Material de Apoio
 
