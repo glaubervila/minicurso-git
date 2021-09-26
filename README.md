@@ -362,9 +362,67 @@ Vamos acessar a página do nosso repositório no github, para ver como ficou. o 
 
 ![github repo home](images/github_home_repo.png)
 
-Explicando um pouco a página do repositório, temos no titulo o nome do repositório e se é publico ou privado. A aba Code mostra qual branch estamos vendo, quantos branchs existem no servidor, abaixo temos os arquivos e pastas do projeto e caso seu projeto tenha um arquivo README.md ele será exibido na página principal do projeto.
+Explicando um pouco a página do repositório, temos no titulo o nome do repositório **exemplo_curso_git** e se é publico ou privado. A aba Code mostra qual branch estamos vendo e quantos branchs existem no servidor, abaixo temos os arquivos e pastas do projeto e caso seu projeto tenha um arquivo README.md ele será exibido na página principal do projeto.
 
 É recomendado sempre ter este arquivo, é um arquivo texto escrito com a liguagem Markdown. O github fornece um editor de Markdown que ajuda quem não tem experiencia com esse tipo de marcação. No Readme é interessante ter uma explicação sobre o projeto, para que ele serve, exemplos de como instalar e utilizar.
+
+Agora que nosso repositório está em um servidor remoto vamos adicionar dois comandos a nossa rotina. o Push e Pull.
+
+### Git Pull
+
+O comando git pull é usado para buscar e baixar conteúdo de repositórios remotos e fazer a atualização imediata ao repositório local para que os conteúdos sejam iguais. Fazer o merge de alterações upstream remotas no repositório local é algo comum em fluxos de trabalho de colaboração baseados em Git.
+
+Vamos pensar na seguinte situação, o nosso projeto tem mais pessoas trabalhando nele, e antes que a gente começe uma nova feature vamos atualizar nosso projeto desta forma vamos ter a versão mais recente do nosso branch main.  
+
+```bash
+git pull origin main
+```
+
+*git pull* é para atualizar o branch local com as mudanças que estão no servidor remoto. *origin* se refere a Origem do servidor remoto, no caso quando fizemos o git add remote chamamos a url do repositório de origin. e *main* e qual branch remoto estamos trazendo para nosso branch local. 
+
+![github pull](images/git_pull.png)
+
+Neste caso não tinha nenhuma alteração, os 2 branchs local e remoto estão identicos.
+
+### Git Push
+
+O comando git push é usado para publicar modificações locais a um repositório remoto. Após um repositório local ter sido modificado, um comando push é executado para compartilhar as modificações com membros da equipe remota. [Documentação do git push](https://git-scm.com/docs/git-push/pt_BR)
+
+Para exemplificar este comando, vou criar um arquivo qualquer, fazer um *git add*, depois *git commit*.
+
+```bash
+git push origin main 
+```
+
+*git push* envia as modificações *origin* indica para onde será enviado e *main* é qual branch local está sendo enviado.
+
+![github push](images/git_push.png)
+
+### Exemplo usando Pull e Push
+
+Para ficar mais claro o entendimente de todos os comando até aqui vamos fazer um ciclo completo que é bem proximo ao real no dia a dia.
+
+Você precisa criar uma nova funcionalidade para seu projeto. As etapas seriam as seguintes:
+
+* Estar no branch Main/Master `git checkout main`
+
+* Atualizar o branch local com `git pull origin main`
+
+* Criar um novo branch `git checkout -b new_feature`
+
+* Alterar os arquivos necessários, nesta fase podem ser feitos quantos `git add` e `git commit` forem necessários. até que a feature esteja terminada.
+
+* Atualizar o branch da feature com as modificações que podem ou não exisitir no Main remote. `git pull origin main` essa etapa ajuda a resolver possiveis conflitos caso o mesmo arquivo tenha sido alterado por 2 pessoas diferente.
+
+* Fazer o merge do branch da feature com o seu branch main, local `git checkout main` e `git merge new_feature`.
+
+* Por fim enviar a nova versão do seu branch main para o repositório remoto com `git push origin main`.
+
+Este é apenas um exemplo de como um ciclo de desenvolvimento pode ser.
+
+### Git clone
+
+## Git Flow
 
 ## Material de Apoio
 
