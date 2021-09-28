@@ -2,27 +2,36 @@
 
 _________________
 
-Este repositório é parte do mini curso oferecido pelo [LIneA](https://www.linea.gov.br/)
+Este repositório é parte do mini curso oferecido pelo [LIneA](https://www.linea.gov.br/).
 
 * [Desenvolvimento Colaborativo com Git e GitHub](#desenvolvimento-colaborativo-com-git-e-github)
-* [Objetivo](#objetivo)
-* [Pré requisitos](#pré-requisitos)
-* [Sobre Versionamento](#sobre-versionamento)
-  + [Principais Vantagens](#principais-vantagens)
-  + [Sobre o Git](#sobre-o-git)
-  + [Sobre o GitHub](#sobre-o-github)
-  + [O que é um Repositório](#o-que-é-um-repositório)
-* [Vamos a Prática](#vamos-a-prática)
-  + [Git Init](#git-init)
-  + [Git Status](#git-status)
-  + [Git Add](#git-add)
-  + [Git commit](#git-commit)
-  + [Git log](#git-log)
-  + [Git diff](#git-diff)
-  + [Git checkout](#git-checkout)
-* [Material de Apoio](#material-de-apoio)
+  + [Objetivo](#objetivo)
+  + [Pré requisitos](#pré-requisitos)
+  + [Sobre Versionamento](#sobre-versionamento)
+    - [Principais Vantagens](#principais-vantagens)
+    - [Sobre o Git](#sobre-o-git)
+    - [Sobre o GitHub](#sobre-o-github)
+    - [O que é um Repositório](#o-que-é-um-repositório)
+    - [O que é Branch](#o-que-é-branch)
+    - [O que é Commit](#o-que-é-commit)
+  + [Vamos a Prática](#vamos-a-prática)
+    - [Git Init](#git-init)
+    - [Git Status](#git-status)
+    - [Git Add](#git-add)
+    - [Git commit](#git-commit)
+    - [Git log](#git-log)
+    - [Git diff](#git-diff)
+    - [Git checkout](#git-checkout)
+    - [Git checkout para criar um novo branch](#git-checkout-para-criar-um-novo-branch)
+    - [Git Merge](#git-merge)
+  + [GitHub](#github)
+    - [Git Pull](#git-pull)
+    - [Git Push](#git-push)
+    - [Exemplo usando Pull e Push](#exemplo-usando-pull-e-push)
+    - [Git clone](#git-clone)
+  + [Material de Apoio](#material-de-apoio)
 
-https://ecotrust-canada.github.io/markdown-toc/
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 ## Objetivo
 
@@ -34,7 +43,7 @@ Introduzir o participante a conceitos básicos de versionamento de código e des
 * Ter uma conta no [GitHub](https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home).
 * Ter configurado usuário e senha do github no seu git, seguir este [tutorial](https://git-scm.com/book/pt-br/v2/Come%C3%A7ando-Configura%C3%A7%C3%A3o-Inicial-do-Git)
 
-**TODO:** Gravar um video mostrando a instalação e a configuração.
+Para ajudar eu fiz um pequeno tutorial ensinando a instalar e configurar as credenciais. <https://www.youtube.com/watch?v=KNu75wZCjX0>
 
 ## Sobre Versionamento
 
@@ -64,9 +73,15 @@ GitHub é um serviço de hospedagem de repositórios Git. Enquanto o Git é uma 
 ### O que é um Repositório
 
 Repositório, ou repo, é um diretório onde os arquivos do seu projeto ficam armazenados. Ele pode ser **local**, os arquivos ficam no seu computador ou **remoto** quando os arquivos ficam hospedados no GitHub por exemplo. Você pode armazenar códigos, imagens, áudios, ou qualquer outra coisa relacionada ao projeto no diretório.
-__________
-**TODO**: Adicionar a explicação do que é branch, commit
-_________
+
+### O que é Branch
+
+Uma branch é literalmente uma ramificação da base do código.
+Os repositórios funcionam como uma árvore, enquanto mantemos o código de produção na branch principal master/main por exemplo, podemos criar uma ramificação para trabalhar livremente neste código e somente depois juntar (mergear) estes códigos.
+
+### O que é Commit
+
+O commit captura o estado de um projeto naquele momento. os commits são simples e devem ser usados com frequência. pode conter uma funcionalidade completa ou apenas uma pequena modificação. no momento do commit essas mudanças existem apenas na ramificação onde o commit foi feito. essas mudanças podem ou não ser integradas a ramificação principal usando merge.
 
 ## Vamos a Prática
 
@@ -285,7 +300,7 @@ git log
 
 ![git log 1](images/git_log_1.png)
 
-Agora que fizemos nossa alteração no branch remove_teste, vamos voltar ao branch Master/Main. para isso vamos usar o comando chekout. 
+Agora que fizemos nossa alteração no branch remove_teste, vamos voltar ao branch Master/Main. para isso vamos usar o comando chekout.
 
 ```bash
 git checkout main
@@ -296,13 +311,13 @@ Agora para ilustar que as modificações não existem no branch main, vamos exec
 ![git log 2](images/git_log_2.png)
 
 Repare que no branch Main não tem o commit que removeu o arquivo.
-Isso por que as alterações feitas em um branch só são acessiveis em outro branch quando é feito um Merge. é o que vamos fazer agora 
+Isso por que as alterações feitas em um branch só são acessiveis em outro branch quando é feito um Merge. é o que vamos fazer agora
 
 ### Git Merge
 
 Mesclagem é o jeito do Git de unificar um histórico bifurcado. O comando git merge permite que você pegue as linhas de desenvolvimento independentes criadas pelo git branch e as integre em uma ramificação única. Este comando tem muitas opções vale uma passada na [Documentação](https://git-scm.com/docs/git-merge) e também neste [Tutórial](https://git-scm.com/book/pt-br/v2/Branches-no-Git-O-b%C3%A1sico-de-Ramifica%C3%A7%C3%A3o-Branch-e-Mesclagem-Merge).
 
-Agora vamos unificar as mudanças feitas no branch remove_teste com o branch Main. Primeiro passo é garantir que estamos no branch que vai receber as modificações, isso é feito com o *checkout*. 
+Agora vamos unificar as mudanças feitas no branch remove_teste com o branch Main. Primeiro passo é garantir que estamos no branch que vai receber as modificações, isso é feito com o *checkout*.
 
 Estando no branch Main, vamos executar o comando merge que recebe como parametro o nome do branch com as modificações, o comando fica assim:
 
@@ -378,7 +393,7 @@ Vamos pensar na seguinte situação, o nosso projeto tem mais pessoas trabalhand
 git pull origin main
 ```
 
-*git pull* é para atualizar o branch local com as mudanças que estão no servidor remoto. *origin* se refere a Origem do servidor remoto, no caso quando fizemos o git add remote chamamos a url do repositório de origin. e *main* e qual branch remoto estamos trazendo para nosso branch local. 
+*git pull* é para atualizar o branch local com as mudanças que estão no servidor remoto. *origin* se refere a Origem do servidor remoto, no caso quando fizemos o git add remote chamamos a url do repositório de origin. e *main* e qual branch remoto estamos trazendo para nosso branch local.
 
 ![github pull](images/git_pull.png)
 
@@ -422,7 +437,30 @@ Este é apenas um exemplo de como um ciclo de desenvolvimento pode ser.
 
 ### Git clone
 
-## Git Flow
+No começo da parte pratica eu falei de uma forma de se iniciar a trabalhar em um repositório já existente, essa forma é o clone.
+
+O git clone é usado para copiar um repositório Git existente em um novo diretório local. A ação de clone do Git criará um novo diretório local para o repositório, copiará todo o conteúdo do repositório especificado, criará os branches rastreados remotos e fará o checkout de um branch inicial localmente.
+
+Vamos usar o repositório de exemplo que criamos até aqui. Eu disponibilizei esse repositório no meu github e pode ser acessado neste link <https://github.com/glaubervila/exemplo_curso_git>, vamos supor que você quer colaborar de alguma forma para o projeto, nesse caso você vai precisar fazer um clone do repositório para sua maquina ficando com uma cópia local dele.
+
+![github clone](images/git_clone.png)
+
+Na página do projeto basta clicar no botão code e copiar a endereço do repositório. no terminal vamos rodar o seguinte comando
+
+```bash
+git clone https://github.com/glaubervila/exemplo_curso_git.git
+```
+
+![github clone 1](images/git_clone_1.png)
+
+Pronto agora você tem uma cópia local do repositório, pode fazer um branch fazer alterações e depois solicitar um Pull Request no git hub.
+
+Pull request é uma ação que não está descrita aqui, mas basicamente é você enviar o seu branch e pedir que ele seja adicionado ao branch main. os responsaveis pelo repositório que você clonou vão validar se é uma modificação valida ou relevante para o projeto e se for a sua colaboração passa a fazer parte do projeto. essa parte eu vou explicar na aula de forma interativa. vou adicionar o link da aula assim que estiver disponivel.
+
+Para quem não assistiu a aula o minicurso acaba aqui.
+Se você chegou até aqui espero que esse mini curso tenha te ajudado a entender sobre versionamento, para ajudar na sua jornada deixo abaixo alguns links que eu acho que podem ajudar.
+
+Muito Obrigado e até mais!
 
 ## Material de Apoio
 
